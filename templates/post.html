@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{ post_bg_url }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{post.title}}</h1>
+                    <h2 class="subheading">{{post.tagline}}</h2>
+                    <span class="meta">
+                                Posted on {{ post.date }}
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            {% autoescape false %}
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% for paragraph in post.content.split("\n\n") %}
+                <p>{{ paragraph.replace("\n","<br>") }}</p>
+                {% endfor %}
+            </div>
+            {% endautoescape %}
+        </div>
+    </div>
+</article>
+
+{% block rating %}
+    {% if current_user %}
+    <div class="text-center">
+        <div id="ratingStars">
+            <span class="fa fa-star" data-rating="1" onclick="setRating(1);"></span>
+            <span class="fa fa-star" data-rating="2" onclick="setRating(2);"></span>
+            <span class="fa fa-star" data-rating="3" onclick="setRating(3);"></span>
+            <span class="fa fa-star" data-rating="4" onclick="setRating(4);"></span>
+            <span class="fa fa-star" data-rating="5" onclick="setRating(5);"></span>
+        </div>
+        <input type="hidden" id="ratingInput" value="0">
+    </div>
+    
+    <div class="text-center mt-3">
+        <div id="commentBoxContainer">
+            <textarea rows="4" cols="50" placeholder="Enter your comment here" disabled></textarea>
+            <br>
+            <button class="btn btn-primary" type="submit" disabled>Submit Rating & Comment</button>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        You must be logged in to rate this post.
+    </div>
+    {% endif %}
+{% endblock %}
+{% endblock %}
