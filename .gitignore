@@ -11,7 +11,8 @@ __pycache__/
 
 # Ignore SQL database files
 *.sql
-
+# Ignore database folder
+database/infinitethoughts.sql
 # Distribution / packaging
 .Python
 build/
