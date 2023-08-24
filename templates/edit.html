@@ -7,8 +7,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="site-heading">
-                <h1>Add Posts</h1>
-                <span class="subheading">You can Add Posts here</span>
+                <h1>Edit Posts</h1>
+                <span class="subheading">You can Edit Posts here</span>
             </div>
         </div>
     </div>
@@ -19,6 +19,7 @@
 <div class="row gx-4 gx-lg-5 justify-content-center">
     <div class="col-md-10 col-lg-8 col-xl-7">
         <form id="addEditForm" data-sb-form-api-token="API_TOKEN" action="/edit/{{sno}}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-floating">
                 <input class="form-control" id="title" name="title" type="text" placeholder="Title" value="{{post.title}}" />
                 <label for="title">Title</label>
@@ -40,10 +41,14 @@
                 <div class="invalid-feedback" data-sb-feedback="message:required">Content is required.</div>
             </div>
             <div class="form-floating">
-                <input class="form-control" id="img_file" name="img_file" type="file" placeholder="img_file" value="{{post.img_file}}" />
-                <label for="img_file">Image File</label>
-                <div class="invalid-feedback" data-sb-feedback="img_file:required">Image File is required.</div>
-            </div>
+                <select class="form-select" id="content_type" name="content_type">
+                    <option value="">Select Content Type</option>
+                    {% for option in content_type_options %}
+                        <option value="{{ option['value'] }}" {% if post and post.content_type == option['value'] %}selected{% endif %}>{{ option['label'] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="content_type">Content Type</label>
+            </div>            
             <br />
             <button class="btn btn-primary text-uppercase " id="sendMessageButton" type="submit">Send</button>
             <a class="btn btn-primary text-uppercase" href="/cancel">Cancel</a>  

@@ -9,6 +9,8 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
     <form method="post" action="{{ url_for('user_register') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
         <h1 class="h3 mb-3 fw-normal">User Registration</h1>
         <div class="form-floating">
             <input type="text" name="username" class="form-control" id="username" placeholder="User Name">
@@ -35,8 +37,8 @@
 
         {% set flashed_messages = get_flashed_messages() %}
         {% if flashed_messages %}
-            <p>
-                {{ flashed_messages }}
+            <p class="text-center text-danger">
+                {{ flashed_messages[-1] }}
             </p>
         {% endif %}
     </form>

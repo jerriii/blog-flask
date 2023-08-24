@@ -27,9 +27,26 @@
                 <h3 class="post-subtitle">{{post.tagline}}</h3>
             </a>
             <p class="post-meta">
-                Posted on {{post.date}}
+                Posted by {{ usernames.get(post.user_id, 'Unknown') }} on {{ post.date }}
             </p>
             {{ post.content[0:120] }}...
+            <div class="ratings">
+                <!-- Display overall rating -->
+                <p>Overall Rating:</p>
+                <div class="rating-stars">
+                    {% set integer_stars = post.overall_rating | int %}
+                    {% set decimal_part = post.overall_rating - integer_stars %}
+                    
+                    {% for i in range(integer_stars) %}
+                        <i class="fa-solid fa-star"></i>
+                    {% endfor %}
+                    
+                    {% if decimal_part > 0 %}
+                        <i class="fa-solid fa-star-half"></i>
+                    {% endif %} {{ post.overall_rating }}
+                </div>       
+            </div>
+            
             </div>
             <hr class="my-4" />
         {% endfor %}

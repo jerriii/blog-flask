@@ -10,7 +10,14 @@
     
     <main class="form-signin w-100 m-auto">
         <form method="post" action="{{ url_for('user_login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <h1 class="h3 mb-3 fw-normal">User Login</h1>
+            {% set flashed_messages = get_flashed_messages() %}
+            {% if flashed_messages %}
+                <p class="text-center text-danger">
+                    {{ flashed_messages[-1] }}
+                </p>
+            {% endif %}
             <div class="form-floating">
                 <input type="text" name="email" class="form-control" id="email" placeholder="Email Address">
                 <label for="floatingInput">Email Address</label>
@@ -25,13 +32,6 @@
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
             <p class="mt-5 mb-3 text-body-secondary text-center">not registered yet? <a href="{{ url_for('user_register') }}">Register here</a></p>
-
-            {% set flashed_messages = get_flashed_messages() %}
-            {% if flashed_messages %}
-                <p>
-                    {{ flashed_messages }}
-                </p>
-            {% endif %}
 
         </form>
     </main>

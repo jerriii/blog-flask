@@ -40,12 +40,11 @@ window.addEventListener('DOMContentLoaded', () => {
             searchDropdown.innerHTML = ''; // Clear dropdown when the search query is empty
         } else {
             // Send AJAX request to the server to get search results
-            fetch('/search', {
-                method: 'POST',
+            fetch('/search?q='+query, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ q: query })
+                }
             })
             .then(response => response.json())
             .then(results => {

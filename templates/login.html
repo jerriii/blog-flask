@@ -18,6 +18,7 @@
 
     <main class="form-signin w-100 m-auto">
         <form action="/dashboard" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
             <div class="form-floating">
                 <input type="text" name="uname" class="form-control" id="uname" placeholder="User Name">

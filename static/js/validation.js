@@ -30,3 +30,11 @@ emailInput.addEventListener("input", function (event) {
         emailInput.setCustomValidity("");
     }
 });
+
+const usernameInput = document.getElementById('username');
+usernameInput.addEventListener('input', () => {
+    const inputText = usernameInput.value;
+    if (inputText.length > 0) {
+        usernameInput.value = inputText.charAt(0).toUpperCase() + inputText.slice(1);
+    }
+});
